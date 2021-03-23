@@ -130,8 +130,30 @@ main {
   cursor: pointer;
 }
 
-.search-results {
-  margin-top: 5em;
+.search-page .search-input {
+  position: relative;
+}
+
+.search-page .search-input .back-btn {
+  position: absolute;
+  top: 0;
+  left: 0;
+  background: #008cff;
+  color: #fff;
+  font-size: 2.5rem;
+}
+
+.search-page .search-input input {
+  font-family: 'cairo', sans-serif;
+  width: 100vw;
+  height: 3em;
+  padding: .3em 1em .3em 5em;
+  border: 1px solid #868686;
+  outline: none;
+}
+
+.search-page .search-results {
+  margin-top: 2em;
   padding: 0 2em 0 2em;
   display: -webkit-box;
   display: -ms-flexbox;
@@ -139,4 +161,3 @@ main {
   -ms-flex-wrap: wrap;
       flex-wrap: wrap;
 }
-/*# sourceMappingURL=App.css.map */
