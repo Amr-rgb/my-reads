@@ -1,3 +1,4 @@
+import React from 'react'
 import logo from './../imgs/logo.svg'
 import { FiSearch } from 'react-icons/fi'
 import { Link } from 'react-router-dom'
