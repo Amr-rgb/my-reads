@@ -1,5 +1,5 @@
 # udacity project: MyReads App
-project for udacity frontend web dev advanced program.
+project for udacity frontend web dev advanced program.<br />
 this project aim for practising react basics and using react states
 
 ## installing instructions
