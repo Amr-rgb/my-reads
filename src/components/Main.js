@@ -11,6 +11,10 @@ export function Main() {
     const [read, setRead] = useState(null)
 
     useEffect(() => {
+        updateBooks()
+    }, [])
+
+    function updateBooks() {
         getAll()
             .then(data => {
                 setBooks(data)
@@ -20,7 +24,7 @@ export function Main() {
             }).catch(err => {
                 console.log('error: ', err)
             })
-    }, [])
+    }
 
     return (
         <div className='page-wrapper'>
@@ -32,14 +36,17 @@ export function Main() {
                         {currentlyReading && <Category
                             books={currentlyReading}
                             shelf='currentlyReading'
+                            updateBooks={updateBooks}
                         />}
                         {wantToRead && <Category
                             books={wantToRead}
                             shelf='wantToRead'
+                            updateBooks={updateBooks}
                         />}
                         {read && <Category
                             books={read}
                             shelf='read'
+                            updateBooks={updateBooks}
                         />}
                     </div>
                 )}

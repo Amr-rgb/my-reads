@@ -1,7 +1,7 @@
 import React from 'react'
 import Book from './Book'
 
-export default function Category({ books, shelf }) {
+export default function Category({ books, shelf, updateBooks }) {
 
     return (
         <div className='category'>
@@ -9,7 +9,7 @@ export default function Category({ books, shelf }) {
 
             <div className="books">
                 {books.map(book => (
-                    <Book book={book} shelf={shelf} key={book.id} />
+                    <Book book={book} shelf={shelf} updateBooks={updateBooks} key={book.id} />
                 ))}
             </div>
         </div>

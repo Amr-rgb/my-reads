@@ -1,17 +1,22 @@
 import React from 'react'
 import Book from "./Book"
 import { useEffect, useState } from 'react'
-import { search } from '../BooksApi'
+import { getAll, search } from '../BooksApi'
 import { IoCaretBackOutline } from 'react-icons/io5'
 import { Link } from "react-router-dom"
 
 export default function Search() {
     const [query, setQuery] = useState('')
     const [books, setBooks] = useState([])
+    const [mainBooks, setMainBooks] = useState([])
 
     function changeHandler(e) {
         setQuery(e.target.value)
     }
+
+    useEffect(() => {
+        updateBooks()
+    }, [])
 
     useEffect(() => {
         if (query !== '') {
@@ -20,13 +25,33 @@ export default function Search() {
                     if (data.error) {
                         throw Error('no results')
                     }
-                    setBooks(data)
+                    const mybooks = data
+
+                    //from stackoverflow
+                    for (let i = mybooks.length - 1; i >= 0; i--) {
+                        for (let j = 0; j < mainBooks.length; j++) {
+                            if (mybooks[i] && (mybooks[i].id === mainBooks[j].id)) {
+                                mybooks.splice(i, 1);
+                                mybooks.push(mainBooks[j])
+                            }
+                        }
+                    }
+                    setBooks(mybooks)
                 })
                 .catch(err => {
                     console.log('error: ', err)
                 })
         }
-    }, [query])
+    }, [query, mainBooks])
+
+    function updateBooks() {
+        getAll()
+            .then(data => {
+                setMainBooks(data)
+            }).catch(err => {
+                console.log('error: ', err)
+            })
+    }
 
     return (
         <div className='search-page'>
@@ -39,11 +64,11 @@ export default function Search() {
             <div className="search-results">
                 <h3>results</h3>
 
-                <div className="books">
+                {query && <div className="books">
                     {books && books.map(book => (
-                        <Book book={book} shelf={book.shelf} key={book.id} />
+                        <Book book={book} shelf={book.shelf} updateBooks={updateBooks} key={book.id} />
                     ))}
-                </div>
+                </div>}
             </div>
 
         </div>

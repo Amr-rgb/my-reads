@@ -3,7 +3,7 @@ import { useState } from 'react';
 import { MdArrowDropDown } from 'react-icons/md'
 import { update } from '../BooksApi';
 
-export default function Book({ book, shelf }) {
+export default function Book({ book, shelf, updateBooks }) {
     const [value, setValue] = useState(shelf)
 
     const categories = [
@@ -12,7 +12,6 @@ export default function Book({ book, shelf }) {
         { shelf: "read", text: 'Read' },
     ]
 
-    // const styleWithImage = { backgroundImage: `url(${book.imageLinks.thumbnail})` }
     const styleWithoutImage = { background: 'grey' }
 
     function changeHandler(e) {
@@ -22,9 +21,7 @@ export default function Book({ book, shelf }) {
         }
         setValue(e.target.value)
         update(book, e.target.value)
-            .then(_ => {
-                if (window.location.pathname === '/') window.location.reload(false)
-            })
+            .then(_ => updateBooks())
             .catch(err => {
                 console.log('error: ', err)
             })
@@ -43,12 +40,14 @@ export default function Book({ book, shelf }) {
                 <MdArrowDropDown className='bottom-arrow' />
 
                 <select name="category" id="select" value={value} onChange={(e) => changeHandler(e)}>
+                    <option value='moveto' disabled>move to...</option>
                     {categories.map(book => (
                         <option
                             value={book.shelf}
                             key={book.shelf}
                         >{`${book.shelf === shelf ? '✔' : ''} ${book.text}`}</option>
                     ))}
+                    <option value='none'>none</option>
                 </select>
             </div>
         </div>
