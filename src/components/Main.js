@@ -22,7 +22,7 @@ export function Main() {
     }, [])
 
     return (
-        <>
+        <div className='page-wrapper'>
             <Header />
 
             <main>
@@ -44,6 +44,6 @@ export function Main() {
                 )}
 
             </main >
-        </>
+        </div>
     )
 }
