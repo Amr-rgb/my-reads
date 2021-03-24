@@ -1,5 +1,9 @@
 # udacity project: MyReads App
 
+## installing instructions
+- to install the dependencies used in the app use **npm install**
+- to run the server use **npm start**
+
 ## used technologies
 * html
 * css
