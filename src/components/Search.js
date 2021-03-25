@@ -40,6 +40,7 @@ export default function Search() {
                 })
                 .catch(err => {
                     console.log('error: ', err)
+                    setBooks([])
                 })
         }
     }, [query, mainBooks])

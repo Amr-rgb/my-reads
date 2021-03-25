@@ -4,7 +4,7 @@ import { MdArrowDropDown } from 'react-icons/md'
 import { update } from '../BooksApi';
 
 export default function Book({ book, shelf, updateBooks }) {
-    const [value, setValue] = useState(shelf)
+    const [value, setValue] = useState(shelf ? shelf : 'none')
 
     const categories = [
         { shelf: "currentlyReading", text: 'Currently Reading' },
@@ -47,7 +47,7 @@ export default function Book({ book, shelf, updateBooks }) {
                             key={book.shelf}
                         >{`${book.shelf === shelf ? '✔' : ''} ${book.text}`}</option>
                     ))}
-                    <option value='none'>none</option>
+                    <option value='none'>{`${value === 'none' ? '✔' : ''} none`}</option>
                 </select>
             </div>
         </div>
